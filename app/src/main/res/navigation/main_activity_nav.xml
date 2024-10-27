@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity_nav"
+    app:startDestination="@id/bottomBookingFragment">
+
+    <fragment
+        android:id="@+id/bottomBookingFragment"
+        android:name="com.example.glambooker.ui.fragment.BottomBookingFragment"
+        android:label="fragment_bottom_booking"
+        tools:layout="@layout/fragment_bottom_booking" />
+    <fragment
+        android:id="@+id/bottomVIPFragment"
+        android:name="com.example.glambooker.ui.fragment.BottomVIPFragment"
+        android:label="fragment_bottom_vip"
+        tools:layout="@layout/fragment_bottom_vip" />
+    <fragment
+        android:id="@+id/bottomManageFragment"
+        android:name="com.example.glambooker.ui.fragment.BottomManageFragment"
+        android:label="fragment_bottom_manage"
+        tools:layout="@layout/fragment_bottom_manage" />
+</navigation>

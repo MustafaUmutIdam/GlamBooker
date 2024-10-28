@@ -3,10 +3,12 @@ package com.example.glambooker.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glambooker.data.entity.Workplace
 import com.example.glambooker.databinding.FragmentBottomBookingBinding
 import com.example.glambooker.databinding.WorkplacesCardDesignBinding
+import com.example.glambooker.ui.fragment.BottomBookingFragmentDirections
 
 class WorkplaceAdapter(var mContext:Context,var workplaceList:List<Workplace>) :
     RecyclerView.Adapter<WorkplaceAdapter.WorkplaceCardDesignHolder>() {
@@ -26,6 +28,11 @@ class WorkplaceAdapter(var mContext:Context,var workplaceList:List<Workplace>) :
         h.textViewWorkplaceName.text = workplace.name
         h.textViewWorkplaceDetail.text = workplace.detail
         h.textViewRate.text=workplace.rate
+
+        h.cardViewWorkspace.setOnClickListener{
+            val transition = BottomBookingFragmentDirections.bottomtoBookingDetail(workplace = workplace)
+            Navigation.findNavController(it).navigate(transition)
+        }
     }
 
     override fun getItemCount(): Int {

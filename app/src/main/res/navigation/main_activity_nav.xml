@@ -9,7 +9,11 @@
         android:id="@+id/bottomBookingFragment"
         android:name="com.example.glambooker.ui.fragment.BottomBookingFragment"
         android:label="fragment_bottom_booking"
-        tools:layout="@layout/fragment_bottom_booking" />
+        tools:layout="@layout/fragment_bottom_booking" >
+        <action
+            android:id="@+id/bottomtoBookingDetail"
+            app:destination="@id/bookingDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bottomVIPFragment"
         android:name="com.example.glambooker.ui.fragment.BottomVIPFragment"
@@ -20,4 +24,13 @@
         android:name="com.example.glambooker.ui.fragment.BottomManageFragment"
         android:label="fragment_bottom_manage"
         tools:layout="@layout/fragment_bottom_manage" />
+    <fragment
+        android:id="@+id/bookingDetailFragment"
+        android:name="com.example.glambooker.ui.fragment.BookingDetailFragment"
+        android:label="fragment_booking_detail"
+        tools:layout="@layout/fragment_booking_detail" >
+        <argument
+            android:name="workplace"
+            app:argType="com.example.glambooker.data.entity.Workplace" />
+    </fragment>
 </navigation>

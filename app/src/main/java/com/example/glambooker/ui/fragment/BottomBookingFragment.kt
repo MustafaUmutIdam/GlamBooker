@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
@@ -21,7 +22,9 @@ class BottomBookingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
-        binding = FragmentBottomBookingBinding.inflate(inflater,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_bottom_booking,container,false)
+
+        binding.categoriesText = "Adana/Seyhan/Berberler"
 
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
 
@@ -41,7 +44,7 @@ class BottomBookingFragment : Fragment() {
 
 
         val workplaceAdapter = WorkplaceAdapter(requireContext(),workplaceList)
-        binding.rv.adapter = workplaceAdapter
+        binding.workplaceAdapter = workplaceAdapter
 
         return binding.root
     }

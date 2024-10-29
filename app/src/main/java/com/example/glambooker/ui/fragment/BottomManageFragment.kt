@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.glambooker.R
 import com.example.glambooker.databinding.FragmentBottomManageBinding
@@ -19,8 +20,12 @@ class BottomManageFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentBottomManageBinding.inflate(inflater,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_bottom_manage,container,false)
 
+        binding.manageText = "İŞLETMELERİ YÖNET"
+        binding.beBossText = "PATRON OL"
+        binding.beVIPText = "VIP OL"
+        binding.aboutUsText = "HAKKIMIZDA"
         return binding.root
     }
 

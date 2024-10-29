@@ -3,8 +3,10 @@ package com.example.glambooker.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.glambooker.R
 import com.example.glambooker.data.entity.Workplace
 import com.example.glambooker.databinding.FragmentBottomBookingBinding
 import com.example.glambooker.databinding.WorkplacesCardDesignBinding
@@ -17,7 +19,7 @@ class WorkplaceAdapter(var mContext:Context,var workplaceList:List<Workplace>) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkplaceCardDesignHolder {
-        val binding = WorkplacesCardDesignBinding.inflate(LayoutInflater.from(mContext),parent,false)
+        val binding:WorkplacesCardDesignBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.workplaces_card_design,parent,false)
         return WorkplaceCardDesignHolder(binding)
     }
 
@@ -25,9 +27,7 @@ class WorkplaceAdapter(var mContext:Context,var workplaceList:List<Workplace>) :
         val workplace = workplaceList.get(position)
         val h = holder.design
 
-        h.textViewWorkplaceName.text = workplace.name
-        h.textViewWorkplaceDetail.text = workplace.detail
-        h.textViewRate.text=workplace.rate
+        h.workplace = workplace
 
         h.cardViewWorkspace.setOnClickListener{
             val transition = BottomBookingFragmentDirections.bottomtoBookingDetail(workplace = workplace)

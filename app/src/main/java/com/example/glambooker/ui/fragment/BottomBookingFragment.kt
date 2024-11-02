@@ -28,23 +28,16 @@ class BottomBookingFragment : Fragment() {
 
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
 
-        val workplaceList = ArrayList<Workplace>()
-        val w1 = Workplace(1,"İsmail Erdamar Barber", "Saç/Sakal/Bakım","4.5","berber_image")
-        val w2 = Workplace(2,"İsmail Erdamar Barber", "Saç/Sakal/Bakım","4.5","berber_image")
-        val w3 = Workplace(3,"İsmail Erdamar Barber", "Saç/Sakal/Bakım","4.5","berber_image")
-        workplaceList.add(w1)
-        workplaceList.add(w2)
-        workplaceList.add(w3)
-        workplaceList.add(w1)
-        workplaceList.add(w2)
-        workplaceList.add(w3)
-        workplaceList.add(w1)
-        workplaceList.add(w2)
-        workplaceList.add(w3)
+        viewModel.workplaceList.observe(viewLifecycleOwner){            //it = workplaceList
+            val workplaceAdapter = WorkplaceAdapter(requireContext(),it)
+            binding.workplaceAdapter = workplaceAdapter
 
+        }
 
-        val workplaceAdapter = WorkplaceAdapter(requireContext(),workplaceList)
-        binding.workplaceAdapter = workplaceAdapter
+        binding.imageViewProfile.setOnClickListener{
+            Navigation.findNavController(it).navigate(R.id.bottomBookingToFilterPage)
+        }
+
 
         return binding.root
     }

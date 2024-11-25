@@ -16,6 +16,9 @@
         <action
             android:id="@+id/bottomBookingToFilterPage"
             app:destination="@id/filterPageFragment" />
+        <argument
+            android:name="filter"
+            app:argType="com.example.glambooker.data.entity.Filter" />
     </fragment>
     <fragment
         android:id="@+id/bottomVIPFragment"
@@ -39,5 +42,9 @@
     <fragment
         android:id="@+id/filterPageFragment"
         android:name="com.example.glambooker.ui.fragment.FilterPageFragment"
-        android:label="FilterPageFragment" />
+        android:label="FilterPageFragment" >
+        <action
+            android:id="@+id/filterToBottomBooking"
+            app:destination="@id/bottomBookingFragment" />
+    </fragment>
 </navigation>

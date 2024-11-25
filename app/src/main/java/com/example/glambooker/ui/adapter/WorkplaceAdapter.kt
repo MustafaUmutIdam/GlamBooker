@@ -29,7 +29,7 @@ class WorkplaceAdapter(var mContext:Context,var workplaceList:List<Workplace>) :
 
         h.workplace = workplace
 
-        h.cardViewWorkspace.setOnClickListener{
+        h.cardViewWorkplace.setOnClickListener{
             val transition = BottomBookingFragmentDirections.bottomtoBookingDetail(workplace = workplace)
             Navigation.findNavController(it).navigate(transition)
         }

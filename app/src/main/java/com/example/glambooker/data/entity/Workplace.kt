@@ -3,6 +3,7 @@ package com.example.glambooker.data.entity
 import java.io.Serializable
 
 data class Workplace(val id:Int,
+                     val category:String,
                      val name:String,
                      val detail:String,
                      val city:String,

@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.glambooker.R
 import com.example.glambooker.data.entity.Workplace
@@ -31,12 +32,20 @@ class BottomBookingFragment : Fragment() {
         viewModel.workplaceList.observe(viewLifecycleOwner){            //it = workplaceList
             val workplaceAdapter = WorkplaceAdapter(requireContext(),it)
             binding.workplaceAdapter = workplaceAdapter
-
         }
 
         binding.imageViewProfile.setOnClickListener{
             Navigation.findNavController(it).navigate(R.id.bottomBookingToFilterPage)
         }
+
+
+       /* val bundle:BottomBookingFragmentArgs by navArgs()
+        val filter = bundle.filter
+        val list1 = viewModel.uploadFilterWorkplaces(filter).value
+        val workplaceAdapter = WorkplaceAdapter(requireContext(),list1!!)
+        binding.workplaceAdapter =workplaceAdapter */
+
+
 
 
         return binding.root

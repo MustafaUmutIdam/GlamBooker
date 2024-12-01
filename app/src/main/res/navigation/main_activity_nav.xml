@@ -29,7 +29,11 @@
         android:id="@+id/bottomManageFragment"
         android:name="com.example.glambooker.ui.fragment.BottomManageFragment"
         android:label="fragment_bottom_manage"
-        tools:layout="@layout/fragment_bottom_manage" />
+        tools:layout="@layout/fragment_bottom_manage" >
+        <action
+            android:id="@+id/bottomManageToBeBoss"
+            app:destination="@id/beBossFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookingDetailFragment"
         android:name="com.example.glambooker.ui.fragment.BookingDetailFragment"
@@ -47,4 +51,8 @@
             android:id="@+id/filterToBottomBooking"
             app:destination="@id/bottomBookingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/beBossFragment"
+        android:name="com.example.glambooker.ui.fragment.BeBossFragment"
+        android:label="BeBossFragment" />
 </navigation>

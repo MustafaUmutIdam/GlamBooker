@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.example.glambooker.R
 import com.example.glambooker.databinding.FragmentBookingDetailBinding
-import com.example.glambooker.databinding.FragmentBottomBookingBinding
 
 
 class BookingDetailFragment : Fragment() {
@@ -21,7 +19,7 @@ class BookingDetailFragment : Fragment() {
         val bundle : BookingDetailFragmentArgs by navArgs()
         val workplace = bundle.workplace
 
-        binding.detailInfo.text = "$workplace"
+        binding.detailInfo.text = workplace.toString()
 
 
         return binding.root

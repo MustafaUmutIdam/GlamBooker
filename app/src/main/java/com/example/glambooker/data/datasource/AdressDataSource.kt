@@ -1,15 +1,13 @@
 package com.example.glambooker.data.datasource
 import android.content.Context
-import android.util.Log
 import com.example.glambooker.R
 import com.example.glambooker.data.entity.Adress
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.InputStream
 import org.apache.poi.ss.usermodel.WorkbookFactory
 
 
-class AdressDataSource (val context: Context)   {
+class AdressDataSource (private val context: Context)   {
 
    /* fun uploadCities() : List<Adress> {
         val citiesList = ArrayList<Adress>()
@@ -42,7 +40,4 @@ class AdressDataSource (val context: Context)   {
         workbook.close()
         citiesList1
     }
-
-
-
 }

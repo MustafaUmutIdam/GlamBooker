@@ -1,6 +1,5 @@
 package com.example.glambooker.ui.viewmodel
 
-
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
@@ -11,15 +10,13 @@ import com.example.glambooker.data.repo.WorkplaceRepository
 import com.example.glambooker.myApp.MyApplication
 import kotlinx.coroutines.launch
 
-class FilterPageViewModel (application: Application): AndroidViewModel(application) {
-    val repository: WorkplaceRepository by lazy {
+class BeBossViewModel(application: Application):AndroidViewModel(application) {
+    private val repository: WorkplaceRepository by lazy {
         WorkplaceRepository(application as MyApplication)
     }
-
-    var wrep = WorkplaceRepository(MyApplication())
     var adressList = MutableLiveData<List<Adress>>()
 
-    fun uploadCities (){
+    private fun uploadAdresses (){
         viewModelScope.launch {
             val list = repository.uploadCities()
             if (list .isEmpty()){
@@ -32,7 +29,6 @@ class FilterPageViewModel (application: Application): AndroidViewModel(applicati
 
     }
     init {
-        uploadCities()
+        uploadAdresses()
     }
-
 }

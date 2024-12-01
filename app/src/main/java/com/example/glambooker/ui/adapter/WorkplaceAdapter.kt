@@ -8,11 +8,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glambooker.R
 import com.example.glambooker.data.entity.Workplace
-import com.example.glambooker.databinding.FragmentBottomBookingBinding
 import com.example.glambooker.databinding.WorkplacesCardDesignBinding
 import com.example.glambooker.ui.fragment.BottomBookingFragmentDirections
 
-class WorkplaceAdapter(var mContext:Context,var workplaceList:List<Workplace>) :
+class WorkplaceAdapter(private var mContext:Context, private var workplaceList:List<Workplace>) :
     RecyclerView.Adapter<WorkplaceAdapter.WorkplaceCardDesignHolder>() {
 
     inner class WorkplaceCardDesignHolder(var design:WorkplacesCardDesignBinding) : RecyclerView.ViewHolder(design.root)

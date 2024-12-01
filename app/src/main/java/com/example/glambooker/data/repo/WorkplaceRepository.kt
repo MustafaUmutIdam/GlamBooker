@@ -9,8 +9,8 @@ import com.example.glambooker.myApp.MyApplication
 
 class WorkplaceRepository(val app: MyApplication){
 
-    val wds = WorkplaceDataSource()
-    val ads = AdressDataSource(app)
+    private val wds = WorkplaceDataSource()
+    private val ads = AdressDataSource(app)
 
     fun uploadWorkplaces() : List<Workplace> = wds.uploadWorkplaces()
 

@@ -4,8 +4,7 @@ import android.app.Application
 import com.example.glambooker.data.datasource.AdressDataSource
 
 class MyApplication : Application() {
-    lateinit var adressDataSource: AdressDataSource
-    private set
+    private lateinit var adressDataSource: AdressDataSource
 
     override fun onCreate() {
         super.onCreate()

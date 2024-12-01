@@ -1,6 +1,5 @@
 package com.example.glambooker.data.datasource
 
-import com.example.glambooker.data.entity.Adress
 import com.example.glambooker.data.entity.Filter
 import com.example.glambooker.data.entity.Workplace
 
@@ -10,9 +9,9 @@ class WorkplaceDataSource {
 
 
         val workplaceList = ArrayList<Workplace>()
-        val w1 = Workplace(1,"Berber","İsmail Erdamar Barber", "Saç/Sakal/Bakım","Kayseri","Develi","4.5","berber_image")
-        val w2 = Workplace(2,"Berber","İsmail Erdamar Barber", "Saç/Sakal/Bakım","Kayseri","Develi","4.5","berber_image")
-        val w3 = Workplace(3,"Berber","İsmail Erdamar Barber", "Saç/Sakal/Bakım","Kayseri","Develi","4.5","berber_image")
+        val w1 = Workplace(1,"true","Berber","İsmail Erdamar Barber", "Saç/Sakal/Bakım","Kayseri","Develi","4.5","berber_image")
+        val w2 = Workplace(2,"true","Berber","İsmail Erdamar Barber", "Saç/Sakal/Bakım","Kayseri","Develi","4.5","berber_image")
+        val w3 = Workplace(3,"true","Berber","İsmail Erdamar Barber", "Saç/Sakal/Bakım","Kayseri","Develi","4.5","berber_image")
         workplaceList.add(w1)
         workplaceList.add(w2)
         workplaceList.add(w3)
@@ -30,6 +29,7 @@ class WorkplaceDataSource {
         val workplaceList = ArrayList<Workplace>()
         val w1 = Workplace(
             1,
+            "true",
             "Berber",
             "İsmail Erdamar Barber",
             "Saç/Sakal/Bakım",
@@ -40,6 +40,7 @@ class WorkplaceDataSource {
         )
         val w2 = Workplace(
             2,
+            "true",
             "Berber",
             "İsmail Erdamar Barber",
             "Saç/Sakal/Bakım",
@@ -50,6 +51,7 @@ class WorkplaceDataSource {
         )
         val w3 = Workplace(
             3,
+            "true",
             "Berber",
             "İsmail Erdamar Barber",
             "Saç/Sakal/Bakım",
@@ -69,7 +71,7 @@ class WorkplaceDataSource {
         workplaceList.add(w3)
         val filterList = ArrayList<Workplace>()
         for (i in workplaceList.indices)
-        {   if (workplaceList[i].city == filter.cityFİlter
+        {   if (workplaceList[i].city == filter.cityFilter
                 && workplaceList[i].town == filter.townFilter
                 && workplaceList[i].category == filter.categoryFilter){
                 filterList.add(workplaceList[i])

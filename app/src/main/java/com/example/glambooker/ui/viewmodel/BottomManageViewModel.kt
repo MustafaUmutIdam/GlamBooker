@@ -2,5 +2,4 @@ package com.example.glambooker.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 
-class BottomManageViewModel :ViewModel() {
-}
+class BottomManageViewModel :ViewModel()

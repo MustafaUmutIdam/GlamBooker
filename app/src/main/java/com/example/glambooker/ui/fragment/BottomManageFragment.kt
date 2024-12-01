@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.example.glambooker.R
 import com.example.glambooker.databinding.FragmentBottomManageBinding
-import com.example.glambooker.ui.viewmodel.BottomBookingViewModel
 import com.example.glambooker.ui.viewmodel.BottomManageViewModel
 
 
@@ -19,13 +19,18 @@ class BottomManageFragment : Fragment() {
     private lateinit var viewModel : BottomManageViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_bottom_manage,container,false)
 
         binding.manageText = "İŞLETMELERİ YÖNET"
         binding.beBossText = "PATRON OL"
         binding.beVIPText = "VIP OL"
         binding.aboutUsText = "HAKKIMIZDA"
+
+        binding.chipBeBoss.setOnClickListener {
+        Navigation.findNavController(it).navigate(R.id.bottomManageToBeBoss)
+        }
+
         return binding.root
     }
 

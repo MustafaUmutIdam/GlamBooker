@@ -3,26 +3,24 @@ package com.example.glambooker.ui.fragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import com.example.glambooker.data.entity.Adress
-import com.example.glambooker.data.entity.Filter
-import com.example.glambooker.databinding.FragmentFilterPageBinding
-import com.example.glambooker.ui.viewmodel.FilterPageViewModel
+import com.example.glambooker.data.entity.Workplace
+import com.example.glambooker.databinding.FragmentBeBossBinding
+import com.example.glambooker.ui.viewmodel.BeBossViewModel
 
 
-class FilterPageFragment : Fragment() {
-    private lateinit var binding: FragmentFilterPageBinding
-    private lateinit var  viewModel: FilterPageViewModel
+class BeBossFragment : Fragment() {
+    private lateinit var binding:FragmentBeBossBinding
+    private lateinit var viewModel: BeBossViewModel
     private var selectedCity: String? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): ConstraintLayout {
-
-        binding = FragmentFilterPageBinding.inflate(inflater,container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
+        binding = FragmentBeBossBinding.inflate(inflater, container, false)
 
         viewModel.adressList.observe(viewLifecycleOwner) { list ->
             list?.let {
@@ -44,31 +42,53 @@ class FilterPageFragment : Fragment() {
                 binding.autoCompleteCities.setAdapter(arrayAdapter)
                 selectedCity = "ADANA"
                 //Seçilen şehri burda almalıyım
-                binding.autoCompleteCities.setOnItemClickListener { _, _, position, _ ->
+                binding.autoCompleteCities.setOnItemClickListener { parent, view, position, id ->
                     selectedCity  = arrayAdapter.getItem(position) ?: "KAYSERİ"
                     Toast.makeText(requireContext() , selectedCity,Toast.LENGTH_LONG).show()
                     selectedCity?.let { city -> updateTowns(city ,it) }
                 }
             }
         }
-
         val categories = ArrayList<String>()
         categories.add("Berber")
         categories.add("Güzellik Salonları")
         val arrayAdapter =ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,categories )
         binding.autoCompleteCategories.setAdapter(arrayAdapter)
 
-        binding.buttonSearch.setOnClickListener{
-            val cityFilter =binding.autoCompleteCities.text
-            val townFilter = binding.autoCompleteTowns.text
-            val categoryFilter = binding.autoCompleteCategories.text
-            val filter = Filter(cityFilter.toString(),townFilter.toString(),categoryFilter.toString())
 
-            val transition = FilterPageFragmentDirections.
-            filterToBottomBooking(filter)
-            Navigation.findNavController(it).navigate(transition)
+        binding.buttonRegister.setOnClickListener(){
+            binding.buttonRegister.setOnClickListener {
+                val phone = binding.editTextPhone.text.toString()
+                val name = binding.editTextInputName.text.toString()
+                val category = binding.autoCompleteCategories.text.toString()
+                val city = binding.autoCompleteCities.text.toString()
+                val town = binding.autoCompleteTowns.text.toString()
+
+                //Boş yerleri kontrol
+                if (phone.isEmpty() || name.isEmpty() || category.isEmpty() || city.isEmpty() || town.isEmpty()) {
+                    Toast.makeText(requireContext(), "Lütfen tüm alanları doldurun!", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener // İşlemi durdur
+                }
+
+                //Dolu olursa
+                val workplace = Workplace(
+                    phone.toInt(),
+                    "1",
+                    category,
+                    name,
+                    binding.editTextInputDetail.text.toString().ifEmpty { "Boş" },
+                    city,
+                    town,
+                    "0",
+                    "imageName"
+                )
+
+                Toast.makeText(requireContext(), "${workplace.name} Kaydedildi", Toast.LENGTH_LONG).show()
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
 
         }
+
 
         return binding.root
     }
@@ -79,10 +99,12 @@ class FilterPageFragment : Fragment() {
         binding.autoCompleteTowns.setAdapter(townAdapter)
 
     }
+    //ViewModel direkt kullanılamadığı için burası şart !!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tempViewModel: FilterPageViewModel by viewModels()
+        val tempViewModel: BeBossViewModel by viewModels()
         viewModel = tempViewModel
+
     }
 
 }

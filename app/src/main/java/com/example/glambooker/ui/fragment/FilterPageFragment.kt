@@ -22,7 +22,7 @@ class FilterPageFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): ConstraintLayout {
 
-        binding = FragmentFilterPageBinding.inflate(inflater,container,false)
+        binding = FragmentFilterPageBinding.inflate(inflater, container, false)
 
         viewModel.adressList.observe(viewLifecycleOwner) { list ->
             list?.let {
@@ -40,14 +40,14 @@ class FilterPageFragment : Fragment() {
                 val arrayAdapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_dropdown_item_1line,
-                    cities)
+                    cities
+                )
                 binding.autoCompleteCities.setAdapter(arrayAdapter)
-                selectedCity = "ADANA"
                 //Seçilen şehri burda almalıyım
                 binding.autoCompleteCities.setOnItemClickListener { _, _, position, _ ->
-                    selectedCity  = arrayAdapter.getItem(position) ?: "KAYSERİ"
-                    Toast.makeText(requireContext() , selectedCity,Toast.LENGTH_LONG).show()
-                    selectedCity?.let { city -> updateTowns(city ,it) }
+                    selectedCity = arrayAdapter.getItem(position)
+                    Toast.makeText(requireContext(), selectedCity, Toast.LENGTH_LONG).show()
+                    selectedCity?.let { city -> updateTowns(city, it) }
                 }
             }
         }
@@ -55,19 +55,23 @@ class FilterPageFragment : Fragment() {
         val categories = ArrayList<String>()
         categories.add("Berber")
         categories.add("Güzellik Salonları")
-        val arrayAdapter =ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,categories )
+        val arrayAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, categories)
         binding.autoCompleteCategories.setAdapter(arrayAdapter)
 
-        binding.buttonSearch.setOnClickListener{
-            val cityFilter =binding.autoCompleteCities.text
-            val townFilter = binding.autoCompleteTowns.text
-            val categoryFilter = binding.autoCompleteCategories.text
-            val filter = Filter(cityFilter.toString(),townFilter.toString(),categoryFilter.toString())
+        binding.buttonSearch.setOnClickListener {
+            val cityFilter = binding.autoCompleteCities.text.toString()
+            val townFilter = binding.autoCompleteTowns.text.toString()
+            val categoryFilter = binding.autoCompleteCategories.text.toString()
+            if (cityFilter.isEmpty() || townFilter.isEmpty() || categoryFilter.isEmpty()) {
+                Toast.makeText(requireContext(), "Lütfen tüm alanları doldurun!", Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            }
 
-            val transition = FilterPageFragmentDirections.
-            filterToBottomBooking(filter)
+            val filter = Filter(cityFilter, townFilter, categoryFilter)
+            val transition = FilterPageFragmentDirections.filterToBottomBooking(filter)
             Navigation.findNavController(it).navigate(transition)
-
         }
 
         return binding.root

@@ -56,8 +56,7 @@ class BeBossFragment : Fragment() {
         binding.autoCompleteCategories.setAdapter(arrayAdapter)
 
 
-        binding.buttonRegister.setOnClickListener(){
-            binding.buttonRegister.setOnClickListener {
+            binding.buttonRegister.setOnClickListener{
                 val phone = binding.editTextPhone.text.toString()
                 val name = binding.editTextInputName.text.toString()
                 val category = binding.autoCompleteCategories.text.toString()
@@ -87,7 +86,7 @@ class BeBossFragment : Fragment() {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             }
 
-        }
+
 
 
         return binding.root

@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.glambooker.data.entity.Adress
+import com.example.glambooker.data.entity.Workplace
 import com.example.glambooker.data.repo.WorkplaceRepository
 import com.example.glambooker.myApp.MyApplication
 import kotlinx.coroutines.launch
@@ -27,6 +28,9 @@ class BeBossViewModel(application: Application):AndroidViewModel(application) {
             }
         }
 
+    }
+     fun saveWorkplace(workplace: Workplace){
+        repository.saveWorkplace(workplace)
     }
     init {
         uploadAdresses()

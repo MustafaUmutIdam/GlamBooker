@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "661484918396",
+    "project_id": "glam-21d1f",
+    "storage_bucket": "glam-21d1f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661484918396:android:804dcfb9b39c9a1a1adbf9",
+        "android_client_info": {
+          "package_name": "com.example.glambooker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA50BO0bhQRMBkhv8I_Sc9Zd8UiXoobaB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,12 +2,12 @@ package com.example.glambooker.data.entity
 
 import java.io.Serializable
 
-data class Workplace(val id:Int,
-                     val boss:String,
-                     val category:String,
-                     val name:String,
-                     val detail:String,
-                     val city:String,
-                     val town:String,
-                     val rate:String,
-                     val imageName:String) : Serializable
+data class Workplace(var id:String? = "",
+                     var boss:String? = "",
+                     var category:String? = "",
+                     var name:String? = "",
+                     var detail:String? = "",
+                     var city:String? = "",
+                     var town:String? = "",
+                     var rate:String? = "",
+                     var imageName:String? = "") : Serializable

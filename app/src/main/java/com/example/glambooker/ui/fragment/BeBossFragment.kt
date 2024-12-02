@@ -71,7 +71,7 @@ class BeBossFragment : Fragment() {
 
                 //Dolu olursa
                 val workplace = Workplace(
-                    phone.toInt(),
+                    "",
                     "1",
                     category,
                     name,
@@ -81,8 +81,9 @@ class BeBossFragment : Fragment() {
                     "0",
                     "imageName"
                 )
-
+                save(workplace)
                 Toast.makeText(requireContext(), "${workplace.name} Kaydedildi", Toast.LENGTH_LONG).show()
+
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             }
 
@@ -90,6 +91,11 @@ class BeBossFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun save(workplace: Workplace) {
+        viewModel.saveWorkplace(workplace)
+
     }
 
     private fun updateTowns(selectedCity :String, cityDistrictList: List<Adress>) {
@@ -105,5 +111,6 @@ class BeBossFragment : Fragment() {
         viewModel = tempViewModel
 
     }
+
 
 }

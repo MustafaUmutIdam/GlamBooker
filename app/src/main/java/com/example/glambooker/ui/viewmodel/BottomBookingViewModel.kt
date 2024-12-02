@@ -20,7 +20,7 @@ class BottomBookingViewModel (application: Application) :AndroidViewModel(applic
     var filter = MutableLiveData<Filter>()
 
     fun uploadWorkplaces(){
-        workplaceList.value = repository.uploadWorkplaces()
+        workplaceList = repository.uploadWorkplaces()
     }
 
     fun uploadFilterWorkplaces(filter: Filter) :MutableLiveData<List<Workplace>> {

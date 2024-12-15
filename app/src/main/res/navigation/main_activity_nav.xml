@@ -33,6 +33,9 @@
         <action
             android:id="@+id/bottomManageToBeBoss"
             app:destination="@id/beBossFragment" />
+        <action
+            android:id="@+id/manageToDate"
+            app:destination="@id/dateManageFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookingDetailFragment"
@@ -55,4 +58,9 @@
         android:id="@+id/beBossFragment"
         android:name="com.example.glambooker.ui.fragment.BeBossFragment"
         android:label="BeBossFragment" />
+    <fragment
+        android:id="@+id/dateManageFragment"
+        android:name="com.example.glambooker.ui.fragment.DateManageFragment"
+        android:label="fragment_date_manage"
+        tools:layout="@layout/fragment_date_manage" />
 </navigation>

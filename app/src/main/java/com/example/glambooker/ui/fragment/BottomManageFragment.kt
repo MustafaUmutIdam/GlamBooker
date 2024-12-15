@@ -31,6 +31,10 @@ class BottomManageFragment : Fragment() {
         Navigation.findNavController(it).navigate(R.id.bottomManageToBeBoss)
         }
 
+        binding.chipManage.setOnClickListener{
+            Navigation.findNavController(it).navigate(R.id.manageToDate)
+        }
+
         return binding.root
     }
 

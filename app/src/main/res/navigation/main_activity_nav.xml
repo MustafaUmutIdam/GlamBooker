@@ -62,5 +62,14 @@
         android:id="@+id/dateManageFragment"
         android:name="com.example.glambooker.ui.fragment.DateManageFragment"
         android:label="fragment_date_manage"
-        tools:layout="@layout/fragment_date_manage" />
+        tools:layout="@layout/fragment_date_manage" >
+        <action
+            android:id="@+id/dateManageToDateAdd"
+            app:destination="@id/dateAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dateAddFragment"
+        android:name="com.example.glambooker.ui.fragment.DateAddFragment"
+        android:label="fragment_date_add"
+        tools:layout="@layout/fragment_date_add" />
 </navigation>

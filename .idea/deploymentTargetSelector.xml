@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-29T08:50:28.430389400Z">
+        <DropdownSelection timestamp="2024-12-18T10:31:27.940360600Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=RF8N9389T8M" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\musta\.android\avd\Pixel_7_API_30_for_Kotlin.avd" />
             </handle>
           </Target>
         </DropdownSelection>

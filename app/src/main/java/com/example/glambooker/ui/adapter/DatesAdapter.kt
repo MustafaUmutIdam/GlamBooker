@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glambooker.databinding.DateCardDesignBinding
-import com.example.glambooker.databinding.FragmentDateManageBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -31,6 +30,7 @@ class DatesAdapter(var mcontext : Context, private val days : List<String>) :
 
         val chipGroup : ChipGroup = h.chipHour
 
+        //Card'in icindeki saat Chipleri olusuyor
         if (chipGroup.childCount == 0 ){
             for (hour in 12..23){
                 val chip = Chip(chipGroup.context)
@@ -38,6 +38,7 @@ class DatesAdapter(var mcontext : Context, private val days : List<String>) :
                 chipGroup.addView(chip)
             }
         }
+        //Ilk buildde nasıl gözüktügü
         if (expandedPositions.contains(position)) {
             h.textViewDay.visibility = View.GONE
             chipGroup.visibility = View.VISIBLE
@@ -46,6 +47,7 @@ class DatesAdapter(var mcontext : Context, private val days : List<String>) :
             chipGroup.visibility = View.GONE
         }
 
+        //Card'a tıklayinca degisim
         h.cVDay.setOnClickListener{
             if (expandedPositions.contains(position)){
                 expandedPositions.remove(position)
@@ -55,8 +57,6 @@ class DatesAdapter(var mcontext : Context, private val days : List<String>) :
             }
             notifyItemChanged(position)
         }
-
-
     }
 
     override fun getItemCount(): Int {

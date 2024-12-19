@@ -5,54 +5,63 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.glambooker.data.entity.Date
 import com.example.glambooker.databinding.DateCardDesignBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-class DatesAdapter(var mcontext : Context, private val days : List<String>) :
-    RecyclerView.Adapter<DatesAdapter.DateCardDesignHolder>() {
+class DatesAdapter(
+    private val context: Context,
+    private val datesList: List<Date>
+) : RecyclerView.Adapter<DatesAdapter.DateCardDesignHolder>() {
+
     private val expandedPositions = mutableSetOf<Int>()
 
-    inner class DateCardDesignHolder(var design: DateCardDesignBinding) : RecyclerView.ViewHolder(design.root)
+    // Gruplama işlemi: Aynı dayPlace değerine sahip Date nesnelerini bir araya getirme
+    private val groupedDates = datesList.groupBy { it.dayPlace }
 
+    inner class DateCardDesignHolder(val binding: DateCardDesignBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DateCardDesignHolder {
-        val binding = DateCardDesignBinding.inflate(LayoutInflater.from(mcontext),parent,false)
+        val binding = DateCardDesignBinding.inflate(LayoutInflater.from(context), parent, false)
         return DateCardDesignHolder(binding)
     }
 
-    //Fonksiyonel islemler
     override fun onBindViewHolder(holder: DateCardDesignHolder, position: Int) {
-        val day = days.get(position)
-        val h = holder.design
+        val dayPlace = groupedDates.keys.toList()[position]
+        val dateListForPlace = groupedDates[dayPlace] ?: emptyList()
 
-        h.textViewDay.text=day
+        val binding = holder.binding
+        binding.textViewDay.text = datesList[position].dayTime
 
-        val chipGroup : ChipGroup = h.chipHour
+        // ChipGroup'i temizle (önceki Chip'leri kaldır)
+        val chipGroup = binding.chipHour
+        chipGroup.removeAllViews()
 
-        //Card'in icindeki saat Chipleri olusuyor
-        if (chipGroup.childCount == 0 ){
-            for (hour in 12..23){
-                val chip = Chip(chipGroup.context)
-                chip.text = "$hour:00"
+        // Her dayPlace için hourTime'ları ekle
+        for (date in dateListForPlace) {
+            date.hourTime?.let { hourTime ->
+                val chip = Chip(context).apply {
+                    text = hourTime
+                }
                 chipGroup.addView(chip)
             }
         }
-        //Ilk buildde nasıl gözüktügü
+
+        // İlk durum - Card görünümü
         if (expandedPositions.contains(position)) {
-            h.textViewDay.visibility = View.GONE
+            binding.textViewDay.visibility = View.GONE
             chipGroup.visibility = View.VISIBLE
         } else {
-            h.textViewDay.visibility = View.VISIBLE
+            binding.textViewDay.visibility = View.VISIBLE
             chipGroup.visibility = View.GONE
         }
 
-        //Card'a tıklayinca degisim
-        h.cVDay.setOnClickListener{
-            if (expandedPositions.contains(position)){
+        // Card tıklama davranışı
+        binding.cVDay.setOnClickListener {
+            if (expandedPositions.contains(position)) {
                 expandedPositions.remove(position)
-            }
-            else{
+            } else {
                 expandedPositions.add(position)
             }
             notifyItemChanged(position)
@@ -60,8 +69,6 @@ class DatesAdapter(var mcontext : Context, private val days : List<String>) :
     }
 
     override fun getItemCount(): Int {
-        return days.size
+        return groupedDates.size
     }
-
-
 }

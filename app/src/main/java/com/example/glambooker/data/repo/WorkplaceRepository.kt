@@ -25,4 +25,6 @@ class WorkplaceRepository(val app: MyApplication){
     suspend fun uploadCities() : List<Adress> = ads.getAdress()
 
     fun saveDates(date:Date)= dds.saveDates(date)
+
+    fun uploadDates(): MutableLiveData<List<Date>> = dds.uploadDates()
 }

@@ -15,6 +15,7 @@ class BeBossViewModel(application: Application):AndroidViewModel(application) {
     private val repository: WorkplaceRepository by lazy {
         WorkplaceRepository(application as MyApplication)
     }
+
     var adressList = MutableLiveData<List<Adress>>()
 
     private fun uploadAdresses (){
@@ -29,9 +30,11 @@ class BeBossViewModel(application: Application):AndroidViewModel(application) {
         }
 
     }
+
      fun saveWorkplace(workplace: Workplace){
         repository.saveWorkplace(workplace)
     }
+
     init {
         uploadAdresses()
     }

@@ -151,13 +151,29 @@
         <Button
             android:id="@+id/buttonRegister"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="32dp"
             android:text="KAYDOL"
             android:textColor="@color/greenBlack"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fabAddImage" />
+
+        <Button
+            android:id="@+id/buttonGetLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/greenBlack"
+            android:text="Konum Ekle"
+            android:textColor="@color/lightGreen"
+            app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fabAddImage" />

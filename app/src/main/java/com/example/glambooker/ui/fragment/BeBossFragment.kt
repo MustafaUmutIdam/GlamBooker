@@ -1,5 +1,7 @@
 package com.example.glambooker.ui.fragment
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import com.example.glambooker.MainActivity
 import com.example.glambooker.data.entity.Adress
 import com.example.glambooker.data.entity.Workplace
 import com.example.glambooker.databinding.FragmentBeBossBinding
@@ -18,6 +24,20 @@ class BeBossFragment : Fragment() {
     private lateinit var binding:FragmentBeBossBinding
     private lateinit var viewModel: BeBossViewModel
     private var selectedCity: String? = null
+    private var checkPermission = 0
+
+    private val locationPermissionRequest = registerForActivityResult(//İzin onay Sonucu gösteriyor
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {//Kullanici izni verdi
+            Toast.makeText(requireContext(), "İzin Onaylandı", Toast.LENGTH_SHORT).show()
+            getLocation()//Konumu al
+        }
+        else {//Kullanici izni reddetti
+            Toast.makeText(requireContext(), "İzin Reddedildi", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
         binding = FragmentBeBossBinding.inflate(inflater, container, false)
@@ -55,6 +75,21 @@ class BeBossFragment : Fragment() {
         val arrayAdapter =ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,categories )
         binding.autoCompleteCategories.setAdapter(arrayAdapter)
 
+        //Konum alma islemleri
+        binding.buttonGetLocation.setOnClickListener{
+            val checkPermission = ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+
+            if (checkPermission == PackageManager.PERMISSION_GRANTED) {//Eger izin onceden verilmisse direkt konumu al
+
+                getLocation()
+            }
+            else {//Eger izin verilmemisse, yeni API ile izin iste
+                locationPermissionRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+        }
 
             binding.buttonRegister.setOnClickListener{
                 val phone = binding.editTextPhone.text.toString()
@@ -88,22 +123,29 @@ class BeBossFragment : Fragment() {
             }
 
 
-
-
         return binding.root
     }
+
 
     private fun save(workplace: Workplace) {
         viewModel.saveWorkplace(workplace)
 
     }
-
     private fun updateTowns(selectedCity :String, cityDistrictList: List<Adress>) {
         val towns = cityDistrictList.filter { it.city == selectedCity }.map { it.town }
         val townAdapter= ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,towns)
         binding.autoCompleteTowns.setAdapter(townAdapter)
 
     }
+    private fun getLocation(){
+        checkPermission = ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.ACCESS_FINE_LOCATION)
+        if(checkPermission == PackageManager.PERMISSION_GRANTED){//İzin onaylanmissa
+        }
+        else{ //Onayli degilse burda build oluyor
+            ActivityCompat.requestPermissions(MainActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),100)
+        }
+    }
+
     //ViewModel direkt kullanılamadığı için burası şart !!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,6 +153,4 @@ class BeBossFragment : Fragment() {
         viewModel = tempViewModel
 
     }
-
-
 }

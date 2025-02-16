@@ -21,15 +21,24 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
+        android:textColorHint="@color/greenBlack"
+        app:boxBackgroundColor="@color/lightGreen"
+        app:helperTextTextColor="@color/greenBlack"
+        app:hintTextColor="@color/greenBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderTextColor="@color/greenBlack">
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteCities"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Şehirler" />
+            android:hint="Şehirler"
+            android:shadowColor="@color/normalGreen"
+            android:textColor="@color/darkGreen"
+            android:textColorHint="@color/greenBlack"
+            app:simpleItemSelectedColor="@color/lightGreen" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,6 +50,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:textColorHint="@color/greenBlack"
+        app:boxBackgroundColor="@color/lightGreen"
+        app:hintTextColor="@color/greenBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputCity">
@@ -49,7 +61,9 @@
             android:id="@+id/autoCompleteTowns"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="İlçeler" />
+            android:hint="İlçeler"
+            android:textColor="@color/greenBlack"
+            android:textColorHint="@color/greenBlack" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,6 +75,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:textColorHint="@color/greenBlack"
+        app:boxBackgroundColor="@color/lightGreen"
+        app:hintTextColor="@color/greenBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputTown">
@@ -69,7 +86,9 @@
             android:id="@+id/autoCompleteCategories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Kategori" />
+            android:hint="Kategori"
+            android:textColor="@color/greenBlack"
+            android:textColorHint="@color/greenBlack" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,6 +100,7 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="64dp"
         android:text="Ara"
+        android:textColor="@color/greenBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputCategory" />

@@ -40,6 +40,8 @@
             android:layout_marginEnd="8dp"
             android:text="@{categoriesText}"
             android:textAlignment="center"
+            app:chipBackgroundColor="@color/greenBlack"
+            app:chipSurfaceColor="@color/greenBlack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageViewProfile"
             app:layout_constraintTop_toTopOf="parent" />

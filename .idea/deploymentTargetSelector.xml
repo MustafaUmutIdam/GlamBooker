@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-12-19T09:20:42.265999400Z">
+        <DropdownSelection timestamp="2025-02-12T19:48:18.876210Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\musta\.android\avd\Pixel_7_API_30_for_Kotlin.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\musta\.android\avd\Pixel_7_API_33_s20FE.avd" />
             </handle>
           </Target>
         </DropdownSelection>

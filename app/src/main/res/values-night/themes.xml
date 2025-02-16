@@ -2,6 +2,12 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.GlamBooker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/normalGreen</item>
+        <item name="colorSecondary">@color/darkGreen</item>
+        <item name="android:colorPrimaryDark">@color/darkGreen</item>
+        <item name="android:colorBackground">@color/darkGreen</item>
+        <item name="android:colorForeground">@color/greenBlack</item>
+        <item name="android:textColor">@color/lightGreen</item>
+
     </style>
 </resources>

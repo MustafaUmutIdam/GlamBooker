@@ -1,8 +1,11 @@
 package com.example.glambooker.ui.fragment
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +21,9 @@ import com.example.glambooker.data.entity.Adress
 import com.example.glambooker.data.entity.Workplace
 import com.example.glambooker.databinding.FragmentBeBossBinding
 import com.example.glambooker.ui.viewmodel.BeBossViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.Task
 
 
 class BeBossFragment : Fragment() {
@@ -25,12 +31,17 @@ class BeBossFragment : Fragment() {
     private lateinit var viewModel: BeBossViewModel
     private var selectedCity: String? = null
     private var checkPermission = 0
+    private lateinit var flpc:FusedLocationProviderClient
+    private lateinit var locationTask:Task<Location>
 
+    @SuppressLint("MissingPermission")
     private val locationPermissionRequest = registerForActivityResult(//İzin onay Sonucu gösteriyor
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
+
         if (isGranted) {//Kullanici izni verdi
-            Toast.makeText(requireContext(), "İzin Onaylandı", Toast.LENGTH_SHORT).show()
+
+            locationTask = flpc.lastLocation
             getLocation()//Konumu al
         }
         else {//Kullanici izni reddetti
@@ -41,6 +52,9 @@ class BeBossFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
         binding = FragmentBeBossBinding.inflate(inflater, container, false)
+
+        //Baslangıcta direkt calismali
+        flpc = LocationServices.getFusedLocationProviderClient(requireContext())
 
         viewModel.adressList.observe(viewLifecycleOwner) { list ->
             list?.let {
@@ -81,9 +95,8 @@ class BeBossFragment : Fragment() {
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
-
             if (checkPermission == PackageManager.PERMISSION_GRANTED) {//Eger izin onceden verilmisse direkt konumu al
-
+                locationTask = flpc.lastLocation
                 getLocation()
             }
             else {//Eger izin verilmemisse, yeni API ile izin iste
@@ -122,10 +135,8 @@ class BeBossFragment : Fragment() {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             }
 
-
         return binding.root
     }
-
 
     private fun save(workplace: Workplace) {
         viewModel.saveWorkplace(workplace)
@@ -137,12 +148,22 @@ class BeBossFragment : Fragment() {
         binding.autoCompleteTowns.setAdapter(townAdapter)
 
     }
-    private fun getLocation(){
+    private fun getLocationPermission(){
         checkPermission = ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.ACCESS_FINE_LOCATION)
         if(checkPermission == PackageManager.PERMISSION_GRANTED){//İzin onaylanmissa
         }
         else{ //Onayli degilse burda build oluyor
             ActivityCompat.requestPermissions(MainActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),100)
+        }
+    }
+    private fun getLocation(){
+        locationTask.addOnSuccessListener {
+            if(it!=null){//Konum Doluysa
+                binding.textView.text = "Enlem:${it.latitude} ,, Boylam:${it.longitude}"
+            }
+            else{//Konum Dolu degilse
+                binding.textView.text = "Konum yok"
+            }
         }
     }
 
